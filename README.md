@@ -303,7 +303,7 @@ MIT License
 
 ## 📧 联系方式
 
-如有问题或建议，欢迎提交 Issue 或发送邮件至：your-email@example.com
+如有问题或建议，欢迎提交 Issue 或发送邮件至：112070945@qq.com
 
 ---
 
