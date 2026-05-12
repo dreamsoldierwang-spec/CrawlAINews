@@ -1,0 +1,28 @@
+<view class="container">
+  <view wx:if="{{!isLoggedIn}}" class="login-tip">
+    <text>登录后查看收藏</text>
+    <button class="btn-primary" bindtap="onLoginTap">微信登录</button>
+  </view>
+
+  <view wx:else>
+    <view class="favorites-list" wx:if="{{favorites.length > 0}}">
+      <block wx:for="{{favorites}}" wx:key="id">
+        <view class="news-item" bindtap="onNewsTap" data-id="{{item.id}}">
+          <view class="news-source">
+            <text class="source-tag">{{item.source_name}}</text>
+            <text class="news-date">{{item.publish_date}}</text>
+          </view>
+          <text class="news-title">{{item.title}}</text>
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="{{!loading && favorites.length === 0}}" class="empty">
+      <text>暂无收藏</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+</view>

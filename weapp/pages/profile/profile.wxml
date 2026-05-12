@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="user-card">
+    <block wx:if="{{isLoggedIn && userInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+      <text class="nickname">{{userInfo.nickname || '微信用户'}}</text>
+    </block>
+    <block wx:else>
+      <image class="avatar" src="/images/default-avatar.png" mode="aspectFill" />
+      <text class="nickname">未登录</text>
+      <button class="btn-primary login-btn" bindtap="onLoginTap">微信登录</button>
+    </block>
+  </view>
+
+  <view class="menu-list" wx:if="{{isLoggedIn}}">
+    <view class="menu-item" bindtap="onFavoritesTap">
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="onLogoutTap">
+      <text class="menu-text logout">退出登录</text>
+    </view>
+  </view>
+</view>

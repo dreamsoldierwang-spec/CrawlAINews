@@ -1,0 +1,619 @@
+.container {
+  padding: 0 32rpx 40rpx;
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* ========================
+   主题样式
+   ======================== */
+.container.theme-night {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+.container.theme-night .header-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+  opacity: 0.15;
+}
+
+.container.theme-night .app-name {
+  color: #e2e8f0;
+}
+
+.container.theme-night .app-slogan {
+  color: #64748b;
+}
+
+.container.theme-night .date-section {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.container.theme-night .date-text {
+  color: #e2e8f0;
+}
+
+.container.theme-night .stat-text {
+  color: #94a3b8;
+}
+
+.container.theme-night .news-card {
+  background: #1e293b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.container.theme-night .news-title {
+  color: #e2e8f0;
+}
+
+.container.theme-night .summary-text {
+  color: #94a3b8;
+}
+
+.container.theme-night .time-text {
+  color: #64748b;
+}
+
+.container.theme-night .empty-title {
+  color: #94a3b8;
+}
+
+.container.theme-night .empty-desc {
+  color: #64748b;
+}
+
+.container.theme-night .footer-decoration {
+  color: #475569;
+}
+
+.container.theme-night .picker-content {
+  background: #1e293b;
+}
+
+.container.theme-night .picker-title {
+  color: #e2e8f0;
+}
+
+.container.theme-night .picker-item {
+  background: #0f172a;
+}
+
+.container.theme-night .picker-item-text {
+  color: #e2e8f0;
+}
+
+.container.theme-eye {
+  background: linear-gradient(180deg, #f5f0e6 0%, #ede6d6 100%);
+}
+
+.container.theme-eye .header-gradient {
+  background: linear-gradient(135deg, #8b9a6d 0%, #a08060 50%, #6b8e23 100%);
+  opacity: 0.1;
+}
+
+.container.theme-eye .app-name {
+  color: #3d3225;
+}
+
+.container.theme-eye .app-slogan {
+  color: #a09070;
+}
+
+.container.theme-eye .date-section {
+  background: #faf6ee;
+  border-color: #d4c9b0;
+}
+
+.container.theme-eye .date-text {
+  color: #3d3225;
+}
+
+.container.theme-eye .stat-text {
+  color: #8b775b;
+}
+
+.container.theme-eye .news-card {
+  background: #faf6ee;
+  box-shadow: 0 4px 20px rgba(139, 119, 91, 0.08);
+}
+
+.container.theme-eye .news-title {
+  color: #3d3225;
+}
+
+.container.theme-eye .summary-text {
+  color: #5c4f3a;
+}
+
+.container.theme-eye .time-text {
+  color: #a09070;
+}
+
+.container.theme-eye .empty-title {
+  color: #8b775b;
+}
+
+.container.theme-eye .empty-desc {
+  color: #a09070;
+}
+
+.container.theme-eye .footer-decoration {
+  color: #b8a88a;
+}
+
+.container.theme-eye .picker-content {
+  background: #faf6ee;
+}
+
+.container.theme-eye .picker-title {
+  color: #3d3225;
+}
+
+.container.theme-eye .picker-item {
+  background: #f5f0e6;
+}
+
+.container.theme-eye .picker-item-text {
+  color: #3d3225;
+}
+
+/* 顶部装饰背景 */
+.header-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400rpx;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.header-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  opacity: 0.08;
+}
+
+.header-pattern {
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+  font-size: 120rpx;
+  opacity: 0.06;
+  color: var(--primary);
+}
+
+/* 顶部信息栏 */
+.header {
+  margin: 0 -32rpx 32rpx;
+  padding: 48rpx 32rpx 32rpx;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.theme-btn {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.theme-btn:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-btn-icon {
+  font-size: 26rpx;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.logo-icon {
+  font-size: 64rpx;
+  line-height: 1;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-name {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.app-slogan {
+  font-size: 20rpx;
+  color: var(--text-muted);
+  margin-top: 2rpx;
+  white-space: nowrap;
+}
+
+.date-section {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: var(--bg-card);
+  padding: 12rpx 20rpx;
+  border-radius: 50rpx;
+  box-shadow: var(--shadow);
+  border: 2rpx solid var(--border);
+  flex-shrink: 0;
+}
+
+.date-icon {
+  font-size: 24rpx;
+}
+
+.date-text {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.date-arrow {
+  font-size: 20rpx;
+  color: var(--text-muted);
+  margin-left: 8rpx;
+}
+
+/* 统计栏 */
+.stats-bar {
+  display: flex;
+  gap: 24rpx;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: rgba(99, 102, 241, 0.06);
+  padding: 12rpx 24rpx;
+  border-radius: 50rpx;
+}
+
+.stat-icon {
+  font-size: 24rpx;
+}
+
+.stat-text {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* 资讯卡片 */
+.news-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 36rpx;
+  margin-bottom: 28rpx;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:active {
+  transform: translateY(-4rpx);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  opacity: 0.8;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.source-tag {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 10rpx 24rpx;
+  border-radius: 50rpx;
+}
+
+.source-icon {
+  font-size: 20rpx;
+}
+
+.source-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.time-tag {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.time-icon {
+  font-size: 20rpx;
+  color: var(--text-muted);
+}
+
+.time-text {
+  font-size: 22rpx;
+  color: var(--text-muted);
+}
+
+.news-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.summary-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(6, 182, 212, 0.05));
+  padding: 20rpx 24rpx;
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.summary-icon {
+  font-size: 24rpx;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.summary-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-tag {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  background: rgba(6, 182, 212, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 50rpx;
+  font-size: 22rpx;
+  color: var(--secondary);
+}
+
+.category-icon {
+  font-size: 20rpx;
+}
+
+.read-more {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 28rpx;
+  transition: transform 0.3s;
+}
+
+.news-card:active .arrow {
+  transform: translateX(8rpx);
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 40rpx;
+}
+
+.loading-spinner {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: var(--text-muted);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 40rpx;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.6;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 12rpx;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* 底部装饰 */
+.footer-decoration {
+  text-align: center;
+  padding: 40rpx;
+  font-size: 24rpx;
+  color: var(--text-muted);
+  letter-spacing: 4rpx;
+}
+
+/* 日期选择器 */
+.picker-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.picker-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 101;
+  padding: 32rpx 32rpx 48rpx;
+  box-shadow: 0 -8rpx 32rpx rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid var(--border);
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.picker-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 50%;
+  font-size: 28rpx;
+  color: var(--text-muted);
+}
+
+.picker-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.picker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: all 0.3s;
+}
+
+.picker-item:active {
+  transform: scale(0.98);
+}
+
+.picker-item.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.3);
+}
+
+.picker-item-text {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.picker-item.active .picker-item-text {
+  color: #fff;
+}
+
+.picker-item-check {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 700;
+}

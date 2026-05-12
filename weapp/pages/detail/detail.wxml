@@ -1,0 +1,117 @@
+<view class="container theme-{{themeMode}}" wx:if="{{!loading && news}}">
+  <!-- 顶部返回栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onBackTap">
+      <text class="nav-icon">←</text>
+      <text class="nav-text">返回</text>
+    </view>
+    <view class="nav-actions">
+      <view class="nav-btn theme-btn" bindtap="onThemeTap" title="切换{{themeLabel}}模式">
+        <text class="nav-btn-icon">{{themeIcon}}</text>
+      </view>
+      <view class="nav-btn" bindtap="onShareTap">
+        <text class="nav-btn-icon">📤</text>
+      </view>
+      <view class="nav-btn" bindtap="onFavoriteTap">
+        <text class="nav-btn-icon">{{isFavorited ? '⭐' : '☆'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 文章头部 -->
+  <view class="article-header">
+    <view class="article-meta">
+      <view class="meta-source">
+        <text class="meta-icon">🔹</text>
+        <text class="meta-text">{{news.source_name}}</text>
+      </view>
+      <view class="meta-time">
+        <text class="meta-icon">🕐</text>
+        <text class="meta-text">{{news.publish_date}}</text>
+      </view>
+    </view>
+    <text class="article-title">{{news.title}}</text>
+  </view>
+
+  <!-- AI 摘要卡片 -->
+  <view class="summary-card" wx:if="{{news.summary}}">
+    <view class="summary-header">
+      <view class="summary-badge">
+        <text class="badge-icon">✨</text>
+        <text class="badge-text">AI 智能摘要</text>
+      </view>
+      <view class="summary-decoration">◆</view>
+    </view>
+    <view class="summary-body">
+      <text class="summary-content">{{news.summary}}</text>
+    </view>
+    <view class="summary-footer">
+      <text class="summary-tag">🤖 由 Kimi AI 生成</text>
+    </view>
+  </view>
+
+  <!-- 原文内容 -->
+  <view class="content-card" wx:if="{{news.content}}">
+    <view class="content-header">
+      <view class="content-badge">
+        <text class="badge-icon">📄</text>
+        <text class="badge-text">原文内容</text>
+      </view>
+    </view>
+    <view class="content-body">
+      <text class="content-text">{{news.content}}</text>
+    </view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar">
+    <view class="action-btn btn-share" bindtap="onShareTap">
+      <text class="action-icon">📤</text>
+      <text class="action-text">分享</text>
+    </view>
+    <view class="action-btn btn-link" bindtap="onReadOriginalTap">
+      <text class="action-icon">🔗</text>
+      <text class="action-text">复制链接</text>
+    </view>
+    <view class="action-btn btn-favorite {{isFavorited ? 'active' : ''}}" bindtap="onFavoriteTap">
+      <text class="action-icon">{{isFavorited ? '⭐' : '☆'}}</text>
+      <text class="action-text">{{isFavorited ? '已收藏' : '收藏'}}</text>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="article-footer">
+    <text class="footer-line">✦</text>
+    <text class="footer-text">END</text>
+    <text class="footer-line">✦</text>
+  </view>
+</view>
+
+<!-- 加载状态 -->
+<view class="loading-state" wx:if="{{loading}}">
+  <view class="loading-spinner">✨</view>
+  <text class="loading-text">加载中...</text>
+</view>
+
+<!-- 复制链接弹框 -->
+<view class="modal-mask" wx:if="{{showLinkModal}}" bindtap="onCloseModal"></view>
+<view class="modal-content" wx:if="{{showLinkModal}}">
+  <view class="modal-header">
+    <text class="modal-icon">🔗</text>
+    <text class="modal-title">原文链接</text>
+  </view>
+  <view class="modal-body">
+    <view class="link-box">
+      <text class="link-text">{{news.source_url}}</text>
+    </view>
+    <view class="modal-btn btn-copy" bindtap="onCopyLinkTap">
+      <text class="btn-icon">📋</text>
+      <text>复制链接到剪贴板</text>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="modal-btn btn-close" bindtap="onCloseModal">
+      <text>关闭</text>
+    </view>
+  </view>
+</view>
