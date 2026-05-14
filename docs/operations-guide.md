@@ -203,6 +203,39 @@ docker cp /data/backup/redis/dump-20240101.rdb ai-news-redis:/data/dump.rdb
 docker restart ai-news-redis
 ```
 
+### 3.4 数据清空（重置）
+
+> ⚠️ **重要提示**：PostgreSQL 和 Redis 之间**不会自动联动清除**。清空数据库后，必须手动清空缓存，否则用户会看到已删除的数据！
+
+```bash
+# 方式一：逐个清空（保留容器配置）
+
+# 1. 清空 PostgreSQL（进入容器执行）
+docker exec -it ai-news-postgres psql -U postgres -d ai_news -c "DELETE FROM news;"
+docker exec -it ai-news-postgres psql -U postgres -d ai_news -c "DELETE FROM favorites;"
+
+# 2. 清空 Redis（清除所有缓存）
+docker exec ai-news-redis redis-cli FLUSHALL
+
+# 方式二：重置整个服务（更彻底，会删除所有数据卷）
+
+# 停止服务并删除数据卷
+docker compose down -v
+
+# 重新启动（会重新创建空数据库和缓存）
+docker compose up -d --build
+```
+
+**数据联动说明：**
+
+| 操作 | 是否需要手动操作 | 说明 |
+|------|----------------|------|
+| 清空 PostgreSQL | ✅ 是 | `DELETE FROM news;` |
+| 清空 Redis | ✅ 是 | `redis-cli FLUSHALL` |
+| 自动联动 | ❌ 否 | 需要额外开发 |
+
+**最佳实践**：清空数据库后，务必同步清空缓存，避免返回脏数据！
+
 ---
 
 ## 四、性能优化

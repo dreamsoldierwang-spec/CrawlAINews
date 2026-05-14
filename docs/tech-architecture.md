@@ -357,8 +357,83 @@ docker compose down
 ## 八、性能优化
 
 ### 8.1 缓存策略
-- Redis 缓存热点数据（首页新闻列表）
-- 缓存过期时间：1 小时
+
+#### 缓存工作原理
+
+Redis 作为缓存层，采用**读写分离**策略：
+
+**读取流程：**
+```typescript
+async getNewsByDate(date: string): Promise<News[]> {
+  const cacheKey = `news:${date}`;
+  
+  // 第一步：先查缓存
+  const cached = await redis.get(cacheKey);
+  if (cached) {
+    return JSON.parse(cached);  // 直接返回缓存（毫秒级响应）
+  }
+  
+  // 第二步：缓存未命中，查数据库
+  const result = await query("SELECT * FROM news WHERE publish_date = $1", [date]);
+  
+  // 第三步：更新缓存（下次请求更快）
+  await redis.set(cacheKey, JSON.stringify(result), "EX", 3600);  // 1小时过期
+  
+  return result;
+}
+```
+
+**清除时机：**
+```typescript
+// 爬虫更新数据后清除相关缓存
+const todayKey = generateDateKey(new Date());
+await redis.del(`news:${todayKey}`);
+```
+
+#### 缓存数据类型
+
+| 数据类型 | 缓存键 | 过期时间 | 说明 |
+|----------|--------|----------|------|
+| **新闻列表** | `news:YYYY-MM-DD` | 1小时 | 按日期缓存首页新闻列表 |
+| **统计数据** | `news:stats` | 1小时 | 数据统计信息 |
+| **来源列表** | `news:sources` | 1小时 | 信息源列表 |
+
+#### 缓存流程图
+
+```
+用户请求首页 → 检查 Redis 缓存
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+      缓存命中            缓存未命中
+          │                   │
+          ▼                   ▼
+    直接返回数据      查询 PostgreSQL
+                          │
+                          ▼
+                    更新 Redis 缓存
+                          │
+                          ▼
+                    返回数据给用户
+
+爬虫更新数据 → 保存到 PostgreSQL → 清除相关缓存
+                                      │
+                                      ▼
+                                下次请求重新缓存
+```
+
+#### 缓存优势
+
+| 特性 | 说明 |
+|------|------|
+| **性能提升** | 响应时间从 ~100ms 降到 ~1ms |
+| **减轻数据库压力** | 热点数据直接从缓存读取 |
+| **数据新鲜度** | 爬虫更新时主动清除缓存 |
+| **自动过期** | 1小时自动过期，保证数据不陈旧 |
+
+#### 数据一致性
+
+> ⚠️ **注意**：PostgreSQL 和 Redis 之间不会自动联动清除。清空数据库后，必须手动执行 `redis-cli FLUSHALL` 清空缓存，否则用户会看到已删除的数据！
 
 ### 8.2 异步处理
 - 爬虫任务异步执行
